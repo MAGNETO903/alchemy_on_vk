@@ -1,0 +1,565 @@
+@font-face {
+	font-family: font_1;
+	src: url("fonts/font_1.ttf")   
+}
+
+/* Remove outline on the forms and links */
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+html {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently */
+            
+	zoom:  100%;
+	background-color: black;
+}
+
+html, body {
+    touch-action: auto;
+}
+
+:focus {outline:none;}
+
+.fullscreen_block, .popup_block {
+	position: absolute;
+}
+
+#game_viewport_block {
+	display: none;
+}
+
+#main_menu_block {
+	background: url('images/back.webp');
+	background-size: cover;
+	background-position: center;
+	display: none;
+}
+
+#title_img {
+	margin-top: 10%;
+}
+
+#buttons_block {
+	background: url('images/Light_shadow.webp');
+	background-size: 100%;
+}
+
+#change_lang_block {
+	cursor: pointer;
+	display: block;
+}
+
+#share_block {
+	cursor: pointer;
+}
+
+.main_menu_button {
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	cursor: pointer;
+}
+
+#main_menu_button_1 {
+	background: url('images/Button_start.png');
+	background-size: 100%;
+}
+
+#main_menu_button_2 {
+	background: url('images/Button_continue.png');
+	background-size: 100%;
+}
+
+#main_menu_button_3 {
+	background: url('images/Button_about.png');
+	background-size: 100%;
+}
+
+.corner_block {
+	z-index: 1;
+	cursor: pointer;
+}
+
+#basic_el_1 {
+	background: url('images/Fire_little.webp');
+	background-size: 100%;
+}
+
+#basic_el_4 {
+	background: url('images/Water_little.webp');
+	background-size: 100%;
+}
+
+#basic_el_3 {
+	background: url('images/Air_little.webp');
+	background-size: 100%;
+}
+
+#basic_el_2 {
+	background: url('images/Earth_little.webp');
+	background-size: 100%;
+}
+
+#left_side_buttons_block, #right_side_buttons_block {
+	z-index: 1;
+}
+
+.side_ico {
+	float: left;
+	cursor: pointer;
+}
+
+#error_ico {
+	background: url('images/Error.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#error_ico:hover {
+	background: url('images/ErrorOn.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#menu_ico {
+	background: url('images/Menu_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#menu_ico:hover {
+	background: url('images/MenuOn_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#catalog_ico {
+	background: url('images/Catalog_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#catalog_ico:hover {
+	background: url('images/CatalogOn_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#book_ico {
+	background: url('images/Book_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#book_ico:hover {
+	background: url('images/BookOn_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#hint_ico {
+	background: url("images/Hint_200.webp");
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#hint_ico:hover {
+	background: url("images/HintOn_200.webp");
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#clean_ico {
+	background: url("images/Clean_200.webp");
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#clean_ico:hover {
+	background: url("images/CleanOn_200.webp");
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.mute_ico {
+	background: url('images/SoundOn.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.mute_ico:hover {
+	background: url('images/SoundOnOn.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.unmute_ico {
+	background: url('images/SoundOff.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.unmute_ico:hover {
+	background: url('images/SoundOffOn.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#share_block {
+	background: url('images/Repost_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#share_block:hover {
+	background: url('images/RepostOn_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.hidden {
+	position: absolute;
+	display: none;
+	top: 9999px;
+}
+
+#catalog_block, #recipe_book_block, #hint_block2, #new_element_block, #event_daily_reward_block, #daily_reward_block, #mobile_daily_reward_block, #achievement_block, #about_game_block, #how_to_play_block, #send_report_block, #update_block {
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 2;
+	display: none;
+
+}
+
+#about_game_block, #how_to_play_block {
+	background: rgba(0, 0, 0, 1);
+	overflow-y: auto;
+}
+
+
+#inner_catalog_block, #inner_recipe_book_block {
+	background: url('images/BigBlock.png');
+	background-size: 100%;
+	z-index: 3;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#inner_hint_block2, #inner_send_report_block {
+	background: url('images/HintBlock.png');
+	background-size: 100%;
+	z-index: 3;
+}
+
+#inner_new_element_block {
+	background: url('images/NewElemBlock.png');
+	background-size: 100%;
+	z-index: 3;
+}
+
+#inner_event_daily_reward_block {
+	background: url('images/SpringTextBlock.webp');
+	background-size: 100%;
+	z-index: 3;
+}
+
+#inner_daily_reward_block {
+	background: url('images/DayBlock.webp');
+	background-size: 100%;
+	z-index: 3;
+}
+
+#mobile_inner_daily_reward_block {
+	background: url('images/DayBlock2.webp');
+	background-size: 100%;
+	z-index: 3;
+}
+
+#inner_achievement_block {
+	background: url('images/AchieveBlock.webp');
+	background-size: 100%;
+	z-index: 3;
+}
+
+.catalog_element_block {
+	background: url('images/LittleBlock.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.reward_element_block, .daily_reward_element_block, .mobile_reward_element_block {
+	background: url('images/LittleBlock.webp');
+	background-size: 100%;
+}
+
+#inner_update_block {
+	/*
+	background: url('images/UpdateBlockText.png');
+	background-size: 100%;
+	*/
+}
+
+.element_name, .recipe_element_name, .reward_element_name, .daily_reward_element_name, .mobile_reward_element_name {
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	padding: 5%;
+	box-sizing: border-box;
+}
+
+.element_name span, .recipe_element_name span, .reward_element_name span, .daily_reward_element_name span, .mobile_reward_element_name span {
+	display: table-cell;
+	vertical-align: middle;
+	line-height: 1.25;
+}
+
+.reward_day_num {
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	padding: 2%;
+	box-sizing: border-box;
+}
+
+.ingredient_name_1, .ingredient_name_2 {
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	padding: 1%;
+	box-sizing: border-box;
+	display: table;
+}
+
+.ingredient_name_1 span, .ingredient_name_2 span {
+	display: table-cell;
+	vertical-align: middle;
+	align-content: center;
+}
+
+#day_counter, #mobile_day_counter {
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+.catalog_element_tick {
+	background: url('images/LittleOk.png');
+	background-size: 100%;
+	display: none;
+}
+
+#catalog_ok_btn, #recipe_book_ok_btn {
+	background: url('images/Ok_200.webp');
+	background-size: 100%;
+	cursor: pointer;
+}
+
+#catalog_ok_btn:hover, #recipe_book_ok_btn:hover {
+	background: url('images/OkOn_200.webp');
+	background-size: 100%;
+}
+
+
+.recipe_left_block {
+	background: url('images/LittleBlock.webp');
+	background-size: 100%;
+}
+
+.recipe_middle_block {
+	background: url('images/LittleBlock2.png');
+	background-size: 100%;
+	color: white;
+	font-family: font_1;
+	padding: 2%;
+	box-sizing: border-box;
+	font-size: 20px;
+	overflow-y: auto;
+}
+
+.recipe_right_block {
+	background: url('images/LittleBlock3.webp');
+	background-size: 100%;
+}
+
+#recipes_block {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#hint2_text, #achievement_text {
+	font-family: font_1;
+	color: white;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+#hint_element, .reward_element_block, .daily_reward_element_block {
+	-moz-box-shadow:0 0 15px purple; 
+	-webkit-box-shadow:0 0 15px purple; 
+	box-shadow:0 0 15px purple;
+}
+
+#hint_ingredient_1, #hint_ingredient_2 {
+	background: none;
+}
+
+#hint_ingredient_1_img {
+	background-image: linear-gradient(
+      to bottom,
+      rgba(181,238,91, 0.5),
+      rgba(181,238,91, 0.5)
+    ), url('images/BallColor.webp');
+    background-size: 100%;
+    border-radius: 50%;
+    background-blend-mode: color;
+    /*filter: hue-rotate(180deg);*/
+}
+
+#hint_ingredient_2_img {
+	background-image: linear-gradient(
+      to bottom,
+      rgba(181,238,91, 0.5),
+      rgba(181,238,91, 0.5)
+    ), url('images/BallColor.webp');
+    background-size: 100%;
+    background-blend-mode: color;
+    border-radius: 50%;
+}
+
+.hint_2_button, .send_report_button {
+	background: url('images/Button_about.png');
+	background-size: 100%;
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	cursor: pointer;
+}
+
+#hint_element_name, #hint_ingredient_1_name, #hint_ingredient_2_name {
+	display: block;
+}
+
+#elements_block {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#catalog_ok_btn_mobile, #recipe_book_ok_btn_mobile, #event_daily_reward_btn, #daily_reward_btn, #mobile_daily_reward_btn, #achievement_ok_btn, #about_game_ok_btn, #how_to_play_ok_btn {
+	background: url('images/Button_about.png');
+	background-size: 100%;
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	cursor: pointer;
+	padding: 1%;
+	box-sizing: border-box;
+}
+
+.recipe {
+	position: relative;
+}
+
+#top_text, #bottom_text {
+	color: white;
+	font-family: font_1;
+
+	z-index: 2;
+	
+	/*text-shadow: 0px 0px 6px rgba(102, 51, 153, 0.7);*/
+	text-shadow: 0 0 0.8em purple, 0 0 0.8em purple, 0 0 0.8em purple, 0 0 0.8em purple, 0 0 0.8em purple, 0 0 0.8em purple;
+
+
+                 
+	/*
+	text-shadow: red 1px 1px 0, red -1px -1px 0, 
+                 red -1px 1px 0, red 1px -1px 0;
+                 */
+}
+
+#new_element_btn, #update_btn_1, #update_btn_2 {
+	background: url('images/Button_about.png');
+	background-size: 100%;
+	color: white;
+	font-family: font_1;
+	text-align: center;
+	cursor: pointer;
+}
+
+#new_element_glow {
+	animation: rotation 15s infinite linear;
+}
+
+#new_element_name {
+	color: white;
+	font-family: font_1;
+	text-align: center;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+#reward_elements_block, #daily_reward_elements_block {
+	position: relative;
+	
+}
+
+.reward_element_name {
+
+}
+
+#send_report_textarea {
+	resize: none;
+	overflow-y: scroll;
+	font-size: 1.5em;
+	color: black;
+}
+
+#link_to_group {
+	position: absolute;
+	font-family: font_1;
+}
+
+
+#test_ad {
+	display: none;
+	position: absolute;
+	background-color: black;
+	color: white;
+	font-family: arial;
+	z-index: 999;
+}
+
+#close_test_ad_btn {
+	position: absolute;
+	cursor: pointer;
+}
+
+#test_ad_text {
+	position: absolute;
+}

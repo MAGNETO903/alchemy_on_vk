@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var start_time = performance.now()
+		// ВСЯКИЕ ПЕРЕМЕННЫЕ
+		// кол-во обычных элементов
+		var COMMON_ELEMENTS_AMOUNT = 143
+		var PLATFORM_TYPE = 'vk'
+		var AD_DELAY = 20*1000
+		var AD_INTERVAL = 2*60*1000
+		var SAMPLE_AD_DURATION = 10
+		var test_ad_time = 0;
+		var PLAN_B = false
+		var allow_sw = false
+		var sber_testing = false
+		var cur_lang = 'ru'
+
+	</script>
+	<meta charset="utf-8">
+	<title>Алхимия</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!--
+    <script src="https://markknol.github.io/console-log-viewer/console-log-viewer.js?closed=true"></script>
+	-->
+
+    <!--
+    <script src="//console.re/connector.js" data-channel="alchemy_sber" id="consolerescript"></script>
+	-->
+
+    <!-- ВСЯКИЕ МЕТРИКИ -->
+
+	<!-- Yandex.Metrika counter -->
+    
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym(82849870, "init", {
+	        clickmap:true,
+	        trackLinks:true,
+	        accurateTrackBounce:true,
+	        webvisor:true
+	   });
+	</script>
+
+	<noscript><div><img src="https://mc.yandex.ru/watch/82849870" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+	
+	<!-- /Yandex.Metrika counter -->
+
+	<script type="text/javascript">
+		if (PLATFORM_TYPE == 'yandex') {
+			ym(82849870,'reachGoal','visit_from_yandex')
+		} else if (PLATFORM_TYPE == 'vk') {
+			ym(82849870,'reachGoal','visit_from_vk')
+		} else if (PLATFORM_TYPE == 'sber') {
+			ym(82849870,'reachGoal','visit_from_sber')
+		}
+		
+	</script>
+    
+    <style type="text/css">
+    	#preloader_block {
+			color:  white;
+			width:  100vw;
+			height: 100vh;
+			font-family: "Century Gothic";
+			position: relative;
+		}
+		#inner_preloader_block {
+			margin: 0;
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    margin-right: -50%;
+		    transform: translate(-50%, -50%)
+		}
+
+		#inner_preloader_block h2 {
+			margin-left: 5%;
+		}
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- SDK -->
+    <!-- YANDEX -->
+    	
+    	<script type="text/javascript" src="https://yandex.ru/games/sdk/v2"></script>
+	
+
+    <!-- VK -->
+    	
+	    	<script src="https://cdn.jsdelivr.net/npm/@vkontakte/vkui@4.13.0/dist/cjs/index.min.js"></script>
+			<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+			<script type="text/javascript" src="//vk.com/js/api/xd_connection.js?2" charset="utf-8"></script>
+			<script type="text/javascript" src="//ad.mail.ru/static/admanhtml/rbadman-html5.min.js" charset="utf-8"></script>
+			<script type="text/javascript" src="//vk.com/js/api/adman_init.js" charset="utf-8"></script>
+			
+			<script type="text/javascript">
+				vkBridge
+		            .send('VKWebAppInit')
+		            .then(data => {
+		                console.log("VK: EVERYTHING OK")
+		                console.log(data)
+		                //game.sdk_ready = true
+		            })
+		            .catch(error => {
+		                // Handling an error
+		        });
+			</script>
+		
+
+	<!-- SBER --> 
+	
+		<!--
+    	<script src="https://cdn-app.sberdevices.ru/shared-static/0.0.0/js/@sberdevices/ad-sdk/ad-sdk.min.js"></script>
+    	<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    	<script src="https://unpkg.com/@sberdevices/assistant-client@3.4.2/umd/assistant.min.js"></script>
+
+    	<script>
+
+      		window.assistant.createAssistant({
+
+        		getState: () => {
+
+          			return {};
+
+        		},
+
+      		});
+
+   		</script>
+
+   		<script src="https://cdn-app.sberdevices.ru/shared-static/0.0.0/polyfills/cookie-ls-polyfill.min.js"></script>
+		-->
+
+    <!-- БИБЛИОТЕКИ -->
+    <!--
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	-->
+
+	<!--<script type="text/javascript" src="lib/blazy.js"></script>-->
+
+	<script type="text/javascript" src="lib/lazysizes.min.js"></script>
+
+	 
+
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/pixi.min.js"></script>
+    <script type="text/javascript" src="lib/local-storage-fallback.min.js"></script>
+    <script type="text/javascript" src="lib/day.js"></script>
+    <script type="text/javascript" src="lib/textFit.min.js"></script>
+    <script type="text/javascript" src="lib/howler.min.js"></script>
+
+
+</head>
+<body>
+
+<!-- БЛОК ЗАГРУЗКИ sss--> 
+<div id="preloader_block" class="fullscreen_block" >
+	<center id="inner_preloader_block" class="popup_block">
+		<img src="images/preloader.gif" width="75">
+		<h2>Загрузка...</h2>
+	</center>
+</div>
+
+<!-- БЛОК ГЛАВНОГО МЕНЮ -->
+<div id="main_menu_block" class="fullscreen_block">
+	<div id="buttons_menu_block" class="popup_block">
+		<img id="title_img" src="images/title.webp">
+		<div id="buttons_block">
+			<div id="main_menu_button_1" class="main_menu_button" onclick="start_game();">Играть</div>
+			<div id="main_menu_button_2" class="main_menu_button" onclick="open_about_game_block();">Об игре</div>
+			<div id="main_menu_button_3" class="main_menu_button" onclick="open_how_to_play_block();" >Как играть</div>
+		</div>
+	</div>
+
+	<img id="change_lang_block" class="popup_block" src="images/rus_200.webp" onclick="change_lang();">
+	<div id="mute_block" class="mute_ico popup_block" onclick="mute();"  ></div>
+	<div id="share_block" class="popup_block" onclick="share();" ></div>
+	<span id="version_text" style="position: absolute; color: white;">v2.9.3 (190) vk</span>	
+	<a target="_top" id="link_to_group" href="https://vk.com/ingenium_games" style="position: absolute; color: white;">Вступайте чтобы быть в курсе новостей!</a>	
+</div>
+
+<!-- БЛОК ИГРОВОГО ОКНА -->
+
+<div id="game_viewport_block" class="fullscreen_block">
+	<div class="corner_block popup_block" id="basic_el_1" ></div>
+	<div class="corner_block popup_block" id="basic_el_2" ></div>
+	<div class="corner_block popup_block" id="basic_el_3" ></div>
+	<div class="corner_block popup_block" id="basic_el_4" ></div>
+
+	<div id="top_text" class="popup_block">
+		Выбранный элемент: 
+	</div>
+
+	<div id="left_side_buttons_block" class="popup_block">
+		<div id="menu_ico" class="side_ico" onclick="back_to_menu();" ontouchstart="back_to_menu();" ></div>
+		<div id="sound_ico" class="mute_ico side_ico" onclick="mute();" ></div>
+		<div id="error_ico" class="side_ico" onclick="open_send_report_block();" ontouchstart="open_send_report_block();"></div>
+	</div>
+
+	<div id="bottom_text" class="popup_block">
+		Открыто элементов: 
+	</div>
+
+	<div id="right_side_buttons_block" class="popup_block">
+		<div id="catalog_ico" class="side_ico" onclick="open_catalog();" ontouchstart="open_catalog();"></div>
+		<div id="book_ico" class="side_ico" onclick="open_recipe_book();" ontouchstart="open_recipe_book();"></div>
+		<div id="hint_ico" class="side_ico" onclick="get_hint();" ontouchstart="get_hint();"></div>
+		<div id="clean_ico" class="side_ico" onclick="clear_all();" ontouchstart="clear_all();"></div>
+	</div>
+</div>
+
+<!-- БЛОК КАТАЛОГА -->
+
+<div id="catalog_block" class="fullscreen_block">
+	<div id="inner_catalog_block" class="popup_block">
+		<img id="catalog_title" src="images/CatalogTitle.webp" class="popup_block">
+		<div id="catalog_ok_btn" class="popup_block" onclick="put_elements_from_catalog();" ontouchstart="put_elements_from_catalog();"></div>
+		<div id="elements_block" class="popup_block">
+			
+		</div>
+		<div id="catalog_ok_btn_mobile" class="popup_block" onclick="put_elements_from_catalog();" ontouchstart="put_elements_from_catalog();">
+			Ок
+		</div>
+	</div>
+</div>
+
+<!-- БЛОК КНИГИ РЕЦЕПТОВ -->
+
+<div id="recipe_book_block" class="fullscreen_block">
+	<div id="inner_recipe_book_block" class="popup_block">
+		<img id="recipe_book_title" src="images/BookTitle.webp" class="popup_block">
+		<div id="recipe_book_ok_btn" class="popup_block" onclick="close_recipe_book();" ontouchstart="close_recipe_book();" ></div>
+		<div id="recipes_block" class="popup_block">
+		</div>
+		<div id="recipe_book_ok_btn_mobile" class="popup_block" onclick="close_recipe_book();" ontouchstart="close_recipe_book();">
+			Ок
+		</div>
+	</div>
+</div>
+
+<!-- БЛОК ПОДСКАЗКИ (полученной) -->
+
+<div id="hint_block2" class="fullscreen_block">
+	<div id="inner_hint_block2" class="popup_block">
+		<img id="hint2_title" src="images/HintTitle.webp">
+		<div id="hint2_text">
+			Духи стихий послали Вам видение. <br> Но лишь смутные образы проносятся перед глазами. <br> Волшебный шар подскажет цвет скрытого элемента
+		</div>
+		<div id="hint2_images">
+			<div id="hint_ingredient_1" class="catalog_element_block popup_block">
+                <div id="hint_ingredient_1_img" class="element_img popup_block" src="images/BallColor.webp"></div>
+                <div id="hint_ingredient_1_name" class="element_name popup_block ">
+                    элемент 1
+                </div>
+            </div>
+			<div id="hint_element" class="catalog_element_block popup_block">
+                <img id="hint_element_img" class="element_img popup_block" src="images/elements/10.webp">
+                <div id="hint_element_name" class="element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+            <div id="hint_ingredient_2" class="catalog_element_block popup_block">
+                <div id="hint_ingredient_2_img" class="element_img popup_block" src="images/BallColor.webp"></div>
+                <div id="hint_ingredient_2_name" class="element_name popup_block ">
+                    элемент 2
+                </div>
+            </div>
+		</div>
+		<div id="hint2_buttons">
+			<div id="hint2_btn_1" class="hint_2_button popup_block" onclick="close_hint2_block();" ontouchstart="close_hint2_block();" >
+				Ок
+			</div>
+			<div id="hint2_btn_2" class="hint_2_button popup_block" onclick="show_rewarded_video(get_hint)" ontouchstart="show_rewarded_video(get_hint);" >
+				Раскрыть элемент 1 <br> (за рекламу)
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- БЛОК ОТКРЫТИЯ НОВОГО ЭЛЕМЕНТА -->
+
+<div id="new_element_block" class="fullscreen_block">
+	<div id="inner_new_element_block" class="popup_block">
+		<img id="new_element_title" src="images/NewTitle.webp">
+		<div id="new_element">
+			<img id="new_element_glow" src="images/Shining.webp" class="popup_block">
+			<img id="new_element_element" src="images/elements/1.webp" class="popup_block">
+			<div id="new_element_name" class="popup_block">квинтэссенция квинтэссенция</div>
+		</div>
+		<center>
+			<div id="new_element_btn"  onclick="close_new_element_block();" ontouchstart="close_new_element_block();">
+				Ок
+			</div>
+		</center>
+	</div>
+</div>
+
+
+
+<!-- БЛОК ЕЖЕДНЕВНЫХ НАГРАД: ВЕСЕННЕЕ НАСТРОЕНИЕ -->
+
+<div id="event_daily_reward_block" class="fullscreen_block">
+	<div id="inner_event_daily_reward_block" class="popup_block">
+		<div id="reward_elements_block">
+			<div id="reward_element_1" class="reward_element_block popup_block">
+                <img id="reward_element_1_img" class="reward_element_img popup_block" src="images/elements/10.webp">
+                <div id="reward_element_1_name" class="reward_element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+            <div id="reward_element_2" class="reward_element_block popup_block">
+                <img id="reward_element_2_img" class="reward_element_img popup_block" src="images/elements/10.webp">
+                <div id="reward_element_2_name" class="reward_element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+            <div id="reward_element_3" class="reward_element_block popup_block">
+                <img id="reward_element_3_img" class="reward_element_img popup_block" src="images/elements/10.webp">
+                <div id="reward_element_3_name" class="reward_element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+		</div>
+		<center>
+			<div id="day_counter">
+				1 день
+			</div>
+			<div id="event_daily_reward_btn" onclick="close_event_daily_reward_block();" ontouchstart="close_event_daily_reward_block();" >
+				Забрать награду
+			</div>
+		</center>
+	</div>
+</div>
+
+
+<!-- БЛОК ЕЖЕДНЕВНЫХ НАГРАД: ОБЫЧНЫЙ -->
+
+<div id="daily_reward_block" class="fullscreen_block">
+	<div id="inner_daily_reward_block" class="popup_block">
+		<div id="daily_reward_elements_block">
+			<div id="daily_reward_element_1" class="daily_reward_element_block popup_block">
+                <img id="daily_reward_element_1_img" class="daily_reward_element_img popup_block" src="images/elements/130.webp">
+                <div id="daily_reward_element_1_name" class="daily_reward_element_name popup_block ">
+                    cолнечный конь
+                </div>
+            </div>
+            <div id="reward_day_1" class="reward_day_num popup_block">
+            	день 1
+            </div>
+		
+
+			<div id="daily_reward_element_2" class="daily_reward_element_block popup_block">
+                <img id="daily_reward_element_2_img" class="daily_reward_element_img popup_block" src="images/elements/131.webp">
+                <div id="daily_reward_element_2_name" class="daily_reward_element_name popup_block ">
+                    изумруд
+                </div>
+            </div>
+            <div id="reward_day_2" class="reward_day_num popup_block">
+            	день 2
+            </div>
+		
+
+		
+			<div id="daily_reward_element_3" class="daily_reward_element_block popup_block">
+                <img id="daily_reward_element_3_img" class="daily_reward_element_img popup_block" src="images/elements/132.webp">
+                <div id="daily_reward_element_3_name" class="daily_reward_element_name popup_block ">
+                    крылья ночи
+                </div>
+            </div>
+            <div id="reward_day_3" class="reward_day_num popup_block">
+            	день 3
+            </div>
+		
+
+		
+			<div id="daily_reward_element_4" class="daily_reward_element_block popup_block">
+                <img id="daily_reward_element_4_img" class="daily_reward_element_img popup_block" src="images/elements/133.webp">
+                <div id="daily_reward_element_4_name" class="daily_reward_element_name popup_block ">
+                    Кольцо всевластия
+                </div>
+            </div>
+            <div id="reward_day_4" class="reward_day_num popup_block">
+            	день 4
+            </div>
+		
+
+		
+			<div id="daily_reward_element_5" class="daily_reward_element_block popup_block">
+                <img id="daily_reward_element_5_img" class="daily_reward_element_img popup_block" src="images/elements/134.webp">
+                <div id="daily_reward_element_5_name" class="daily_reward_element_name popup_block ">
+                    нереида
+                </div>
+            </div>
+            <div id="reward_day_5" class="reward_day_num popup_block">
+            	день 5
+            </div>
+		</div>
+
+		<center>
+		<div id="daily_reward_btn" onclick="close_daily_reward_block();" ontouchstart="close_daily_reward_block();">
+			Забрать награду
+		</div>
+	</center>
+	</div>
+</div>
+
+
+
+<!-- БЛОК ЕЖЕДНЕВНЫХ НАГРАД: обычный для телефона -->
+
+<div id="mobile_daily_reward_block" class="fullscreen_block">
+	<div id="mobile_inner_daily_reward_block" class="popup_block">
+		
+		<div id="mobile_reward_elements_block">
+			<div id="mobile_reward_element_1" class="mobile_reward_element_block popup_block">
+                <img id="mobile_reward_element_1_img" class="mobile_reward_element_img popup_block" src="images/elements/10.webp">
+                <div id="mobile_reward_element_1_name" class="mobile_reward_element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+            <div id="mobile_reward_element_2" class="mobile_reward_element_block popup_block">
+                <img id="mobile_reward_element_2_img" class="mobile_reward_element_img popup_block" src="images/elements/10.webp">
+                <div id="mobile_reward_element_2_name" class="mobile_reward_element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+            <div id="mobile_reward_element_3" class="mobile_reward_element_block popup_block">
+                <img id="mobile_reward_element_3_img" class="mobile_reward_element_img popup_block" src="images/elements/10.webp">
+                <div id="mobile_reward_element_3_name" class="mobile_reward_element_name popup_block ">
+                    что-то
+                </div>
+            </div>
+		</div>
+		<center>
+				<div id="mobile_day_counter">
+				1 день
+			</div>
+			<div id="mobile_daily_reward_btn" onclick="close_daily_reward_block();" ontouchstart="close_daily_reward_block();">
+				Забрать награду
+			</div>
+		</center>
+
+	</div>
+</div>
+
+
+
+<!-- БЛОК ДОСТИЖЕНИЙ -->
+
+<div id="achievement_block" class="fullscreen_block">
+	<div id="inner_achievement_block" class="popup_block">
+		<div id="achievement_text" class="popup_block">
+			
+		</div>
+		<div id="achievement_ok_btn" class="popup_block" onclick="close_achievement_block();" ontouchstart="close_achievement_block();">
+			Ок
+		</div>
+	</div>
+</div>
+
+
+<!-- БЛОК ОБ ИГРЕ -->
+
+<div id="about_game_block" class="fullscreen_block">
+	<img id="about_game_text" src="images/AboutText.webp" class="popup_block ">
+	<center>
+		<div id="about_game_ok_btn" onclick="close_how_to_play_block();close_about_game_block();" ontouchstart="close_how_to_play_block();close_about_game_block();" >
+			Ок
+		</div>
+	</center>
+</div>
+
+
+<!-- БЛОК КАК ИГРАТЬ -->
+
+<div id="how_to_play_block" class="fullscreen_block">
+	<img id="how_to_play_text" class=" popup_block" src="images/About_gor.webp">
+         <!--<img id="how_to_play_text"src="images/About_gor.webp" class="popup_block">-->
+		<center>
+			<div id="how_to_play_ok_btn" onclick="close_about_game_block();close_how_to_play_block();" ontouchstart="close_how_to_play_block();close_about_game_block();">
+			Ок
+		</div>
+	</center>
+</div>
+
+
+<!-- БЛОК ОТПРАВКИ СООБЩЕНИЯ -->
+
+<div id="send_report_block" class="fullscreen_block">
+	<div id="inner_send_report_block" class="popup_block">
+		<img id="send_report_title" src="images/ReportTitle.webp">
+		<center>
+			<textarea id="send_report_textarea" placeholder="Нашли баг? Сообщите нам о нём! Помогите Алхимии стать лучше!" ></textarea>
+		</center>
+		<div id="send_report_buttons">
+			<div id="send_report_btn_1" class="send_report_button popup_block" onclick="send_report();" ontouchstart="send_report();" >
+				Отправить
+			</div>
+			<div id="send_report_btn_2" class="send_report_button popup_block" onclick="close_send_report_block();" ontouchstart="close_send_report_block();">
+				Отмена
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- БЛОК ОБ ОБНОВЛЕНИИ -->
+
+<div id="update_block" class="fullscreen_block">
+	<img id="inner_update_block" class="popup_block " data-src="images/UpdateBlockText.png">
+		<div id="update_btn_1" class="popup_block" >Обновить</div>
+		<div id="update_btn_2" class="popup_block" onclick="close_update_block();" ontouchstart="close_update_block();" >Позже</div>
+	
+</div>
+
+<div id="test_ad">
+
+	<h1 id="test_ad_text">
+		<center id="test_ad_status">Video Ad example ends in</center>
+	</h1>
+</div>
+
+
+
+<!-- ДЛЯ ТАЙНОЙ ЗАГРУЗКИ КАРТИНОК -->
+
+<img src="images/BookOn_200.webp" class="hidden">
+<img src="images/CatalogOn_200.webp" class="hidden">
+<img src="images/CleanOn_200.webp" class="hidden">
+<img src="images/HintOn_200.webp" class="hidden">
+<img src="images/MenuOn_200.webp" class="hidden">
+<img src="images/OkOn_200.webp" class="hidden">
+<img src="images/ErrorOn.webp" class="hidden">
+<img src="images/SoundOff.webp" class="hidden">
+<img src="images/SoundOffOn.webp" class="hidden">
+<img src="images/SoundOn.webp" class="hidden">
+<img src="images/SoundOnOn.webp" class="hidden">
+<img src="images/RepostOn_200.webp" class="hidden">
+<img src="images/LittleOk.png" class="hidden">
+
+
+<script type="text/javascript" src="scripts/data.js?178"></script>
+<script type="text/javascript" src="scripts/init.js?180"></script>
+<script type="text/javascript" src="scripts/css_setup.js?178"></script>
+<script type="text/javascript" src="scripts/Element.js?178"></script>
+<script type="text/javascript" src="scripts/functions.js?178"></script>
+<script type="text/javascript" src="scripts/main.js?180"></script>
+
+</body>
+</html>
